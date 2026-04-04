@@ -52,7 +52,14 @@ Route::post('/portal/event-request', [\App\Http\Controllers\Admin\EventRequestCo
     ->name('portal.event-request.store');
 
 // Public FCM Token Save
-Route::post('/public-fcm-token', function (\Illuminate\Http\Request $request) {
+Route::match(['post', 'options'], '/public-fcm-token', function (\Illuminate\Http\Request $request) {
+    if ($request->isMethod('options')) {
+        return response()->json(['success' => true])
+            ->header('Access-Control-Allow-Origin', '*')
+            ->header('Access-Control-Allow-Methods', 'POST, OPTIONS')
+            ->header('Access-Control-Allow-Headers', 'Content-Type, Accept, X-Requested-With, X-CSRF-TOKEN');
+    }
+
     $request->validate([
         'token' => 'required|string',
         'project' => 'nullable|string|in:pmi,gmci'
@@ -63,7 +70,10 @@ Route::post('/public-fcm-token', function (\Illuminate\Http\Request $request) {
         ['project' => $request->project]
     );
 
-    return response()->json(['success' => true]);
+    return response()->json(['success' => true])
+        ->header('Access-Control-Allow-Origin', '*')
+        ->header('Access-Control-Allow-Methods', 'POST, OPTIONS')
+        ->header('Access-Control-Allow-Headers', 'Content-Type, Accept, X-Requested-With, X-CSRF-TOKEN');
 })->name('public-fcm-token.save');
 
 // API Routes (for driver GPS tracking)
