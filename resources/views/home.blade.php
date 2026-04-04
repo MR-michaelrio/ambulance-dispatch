@@ -197,7 +197,7 @@
                             })
                             .catch((error) => {
                                 console.error('Damkar register error:', error);
-                                alert('Gagal mendaftarkan Token ke Damkar: ' + damkarRaw);
+                                alert('Gagal mendaftarkan Token ke Damkar: ' + error.message);
                             });
                     });
 
