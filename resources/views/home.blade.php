@@ -179,7 +179,7 @@
 
                         const damkarRaw = JSON.stringify({
                             "token": token.value,
-                            "project": "gmci"
+                            "project": 'gmci'
                         });
 
                         const damkarRequestOptions = {
