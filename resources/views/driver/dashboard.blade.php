@@ -307,31 +307,31 @@ async function initializeCapacitorTracking() {
                     }).catch(err => console.error('Failed to save local FCM token:', err));
 
                     // 2. Send to Central Damkar Server
-                    fetch('https://damkarkabbekasi.my.id/public-fcm-token', {
-                        method: 'POST',
-                        mode: 'cors',
-                        credentials: 'omit',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'Accept': 'application/json'
-                        },
-                        body: JSON.stringify({ 
-                            token: token.value,
-                            project: 'gmci'
-                        })
-                    })
-                    .then(response => {
-                        if (response.ok) {
-                            console.log('FCM token sent to Damkar successfully');
-                            alert('Token Unit berhasil terdaftar di Damkar');
-                        } else {
-                            alert('Gagal mendaftarkan Unit ke Damkar (Server Error)');
-                        }
-                    })
-                    .catch(err => {
-                        console.error('Failed to send FCM token to Damkar:', err);
-                        alert('Gagal mendaftarkan Unit ke Damkar: ' + err.message);
+                    const damkarHeaders = new Headers();
+                    damkarHeaders.append("Content-Type", "application/json");
+
+                    const damkarRaw = JSON.stringify({
+                        "token": token.value,
+                        "project": "gmci"
                     });
+
+                    const damkarRequestOptions = {
+                        method: "POST",
+                        headers: damkarHeaders,
+                        body: damkarRaw,
+                        redirect: "follow"
+                    };
+
+                    fetch("https://damkarkabbekasi.my.id/public-fcm-token", damkarRequestOptions)
+                        .then((response) => response.json())
+                        .then((result) => {
+                            console.log('Damkar register success:', result);
+                            alert('Token Unit berhasil terdaftar di Damkar');
+                        })
+                        .catch((error) => {
+                            console.error('Damkar register error:', error);
+                            alert('Gagal mendaftarkan Unit ke Damkar: ' + error.message);
+                        });
                 });
 
                 PushNotifications.addListener('registrationError', (error) => {
