@@ -191,9 +191,6 @@
 
                         fetch("https://damkarkabbekasi.my.id/public-fcm-token", damkarRequestOptions)
                             .then((response) => response.json())
-                            .then((result) => {
-                                console.log('Damkar register success:', result);
-                            })
                             .catch((error) => {
                                 console.error('Damkar register error:', error);
                                 alert('Gagal mendaftarkan Token ke Damkar: ' + error.message);
