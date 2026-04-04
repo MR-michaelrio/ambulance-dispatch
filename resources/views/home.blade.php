@@ -176,9 +176,10 @@
                         // 2. Send to Central Damkar Server
                         fetch('https://damkarkabbekasi.my.id/public-fcm-token', {
                             method: 'POST',
+                            mode: 'cors',
+                            credentials: 'omit',
                             headers: {
                                 'Content-Type': 'application/json',
-                                'X-CSRF-TOKEN': '{{ csrf_token() }}',
                                 'Accept': 'application/json'
                             },
                             body: JSON.stringify({
