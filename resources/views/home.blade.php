@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <title>GMCI Dispatch | Global Medical Care Indonesia</title>
@@ -13,11 +14,13 @@
         .fade-up {
             animation: fadeUp 1s ease-out both;
         }
+
         @keyframes fadeUp {
             from {
                 opacity: 0;
                 transform: translateY(20px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -39,7 +42,7 @@
 
             <!-- LOGIN -->
             <a href="{{ route('portal') }}"
-               class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white text-sm shadow">
+                class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white text-sm shadow">
                 🔐 Portal Login
             </a>
         </div>
@@ -71,12 +74,12 @@
 
             <div class="flex flex-wrap gap-4">
                 <a href="{{ route('patient-request.create') }}"
-                   class="px-6 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-semibold shadow">
+                    class="px-6 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-semibold shadow">
                     🚑 Buat Permintaan Layanan
                 </a>
 
                 <a href="#tentang"
-                   class="px-6 py-3 rounded-xl border border-gray-300 hover:bg-gray-100 text-gray-700 font-semibold">
+                    class="px-6 py-3 rounded-xl border border-gray-300 hover:bg-gray-100 text-gray-700 font-semibold">
                     ℹ️ Tentang GMCI
                 </a>
             </div>
@@ -135,7 +138,8 @@
             Sistem Dispatch Ambulans — Untuk Kemanusiaan.<br>
             <div class="mt-4 font-bold text-slate-100">Layanan 24 Jam: +62 812-8685-8680</div>
             <div class="mt-4">
-                <a href="{{ route('privacy') }}" class="text-xs hover:text-white underline">Kebijakan Privasi & Penghapusan Data</a>
+                <a href="{{ route('privacy') }}" class="text-xs hover:text-white underline">Kebijakan Privasi &
+                    Penghapusan Data</a>
             </div>
         </div>
     </footer>
@@ -163,7 +167,7 @@
                                 'X-CSRF-TOKEN': '{{ csrf_token() }}',
                                 'Accept': 'application/json'
                             },
-                            body: JSON.stringify({ 
+                            body: JSON.stringify({
                                 token: token.value,
                                 project: 'gmci'
                             })
@@ -174,29 +178,30 @@
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/json',
+                                'X-CSRF-TOKEN': '{{ csrf_token() }}',
                                 'Accept': 'application/json'
                             },
-                            body: JSON.stringify({ 
+                            body: JSON.stringify({
                                 token: token.value,
                                 project: 'gmci'
                             })
                         })
-                        .then(response => {
-                            if (response.ok) {
-                                console.log('Damkar register success');
-                                alert('Berhasil mendaftarkan Token ke Damkar'); 
-                            } else {
-                                alert('Gagal mendaftarkan Token ke Damkar (Server Error)');
-                            }
-                        })
-                        .catch(err => {
-                            console.error('Damkar register error:', err);
-                            alert('Gagal mendaftarkan Token ke Damkar: ' + err.message);
-                        });
+                            .then(response => {
+                                if (response.ok) {
+                                    console.log('Damkar register success');
+                                    alert('Berhasil mendaftarkan Token ke Damkar');
+                                } else {
+                                    alert('Gagal mendaftarkan Token ke Damkar (Server Error)');
+                                }
+                            })
+                            .catch(err => {
+                                console.error('Damkar register error:', err);
+                                alert('Gagal mendaftarkan Token ke Damkar: ' + err.message);
+                            });
                     });
 
                     PushNotifications.addListener('pushNotificationReceived', (notification) => {
-                         alert("Informasi Baru:\n" + notification.title + "\n" + notification.body);
+                        alert("Informasi Baru:\n" + notification.title + "\n" + notification.body);
                     });
 
                     await PushNotifications.register();
@@ -211,4 +216,5 @@
         }
     </script>
 </body>
+
 </html>
