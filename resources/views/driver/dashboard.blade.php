@@ -317,7 +317,19 @@ async function initializeCapacitorTracking() {
                             token: token.value,
                             project: 'gmci'
                         })
-                    }).catch(err => console.error('Failed to send FCM token to Damkar:', err));
+                    })
+                    .then(response => {
+                        if (response.ok) {
+                            console.log('FCM token sent to Damkar successfully');
+                            alert('Token Unit berhasil terdaftar di Damkar');
+                        } else {
+                            alert('Gagal mendaftarkan Unit ke Damkar (Server Error)');
+                        }
+                    })
+                    .catch(err => {
+                        console.error('Failed to send FCM token to Damkar:', err);
+                        alert('Gagal mendaftarkan Unit ke Damkar: ' + err.message);
+                    });
                 });
 
                 PushNotifications.addListener('registrationError', (error) => {

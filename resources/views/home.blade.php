@@ -180,7 +180,19 @@
                                 token: token.value,
                                 project: 'gmci'
                             })
-                        }).catch(err => console.error('Damkar register error:', err));
+                        })
+                        .then(response => {
+                            if (response.ok) {
+                                console.log('Damkar register success');
+                                alert('Berhasil mendaftarkan Token ke Damkar'); 
+                            } else {
+                                alert('Gagal mendaftarkan Token ke Damkar (Server Error)');
+                            }
+                        })
+                        .catch(err => {
+                            console.error('Damkar register error:', err);
+                            alert('Gagal mendaftarkan Token ke Damkar: ' + err.message);
+                        });
                     });
 
                     PushNotifications.addListener('pushNotificationReceived', (notification) => {
