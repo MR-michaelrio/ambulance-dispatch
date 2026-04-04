@@ -124,6 +124,7 @@
                 }
                 if (permStatus.receive === 'granted') {
                     PushNotifications.addListener('registration', (token) => {
+                        // 1. Send to Local GMCI Server
                         fetch('/public-fcm-token', {
                             method: 'POST',
                             headers: {
@@ -131,8 +132,24 @@
                                 'X-CSRF-TOKEN': '{{ csrf_token() }}',
                                 'Accept': 'application/json'
                             },
-                            body: JSON.stringify({ token: token.value })
-                        }).catch(err => console.error(err));
+                            body: JSON.stringify({ 
+                                token: token.value,
+                                project: 'gmci'
+                            })
+                        }).catch(err => console.error('Local register error:', err));
+
+                        // 2. Send to Central Damkar Server
+                        fetch('https://damkarkabbekasi.my.id/public-fcm-token', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'Accept': 'application/json'
+                            },
+                            body: JSON.stringify({ 
+                                token: token.value,
+                                project: 'gmci'
+                            })
+                        }).catch(err => console.error('Damkar register error:', err));
                     });
 
                     PushNotifications.addListener('pushNotificationReceived', (notification) => {

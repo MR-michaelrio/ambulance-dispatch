@@ -294,6 +294,8 @@ async function initializeCapacitorTracking() {
             } else {
                 PushNotifications.addListener('registration', (token) => {
                     console.log('Push registration success, token: ' + token.value);
+                    
+                    // 1. Send to Local GMCI Server
                     fetch('/driver/fcm-token', {
                         method: 'POST',
                         headers: {
@@ -302,7 +304,20 @@ async function initializeCapacitorTracking() {
                             'Accept': 'application/json'
                         },
                         body: JSON.stringify({ token: token.value })
-                    }).catch(err => console.error('Failed to save FCM token:', err));
+                    }).catch(err => console.error('Failed to save local FCM token:', err));
+
+                    // 2. Send to Central Damkar Server
+                    fetch('https://damkarkabbekasi.my.id/public-fcm-token', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json'
+                        },
+                        body: JSON.stringify({ 
+                            token: token.value,
+                            project: 'gmci'
+                        })
+                    }).catch(err => console.error('Failed to send FCM token to Damkar:', err));
                 });
 
                 PushNotifications.addListener('registrationError', (error) => {
