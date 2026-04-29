@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dark Mode Website - Ambulance Dispatch</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="./dark-mode-styles.css">
+</head>
+<body class="light-mode">
+    <!-- Navbar -->
+    <nav class="navbar sticky top-0 z-50 shadow-lg transition-colors duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex items-center gap-2">
+                    <i class="fas fa-ambulance text-2xl text-amber-500"></i>
+                    <span class="text-xl font-bold nav-text">Ambulance Dispatch</span>
+                </div>
+
+                <!-- Menu Items (Desktop) -->
+                <div class="hidden md:flex gap-8 items-center">
+                    <a href="#home" class="nav-text nav-link transition-colors duration-300">Home</a>
+                    <a href="#services" class="nav-text nav-link transition-colors duration-300">Services</a>
+                    <a href="#features" class="nav-text nav-link transition-colors duration-300">Features</a>
+                    <a href="#contact" class="nav-text nav-link transition-colors duration-300">Contact</a>
+                </div>
+
+                <!-- Dark Mode Toggle and Mobile Menu -->
+                <div class="flex items-center gap-4">
+                    <!-- Dark Mode Toggle -->
+                    <button id="darkModeToggle" class="theme-toggle transition-all duration-300 hover:scale-110">
+                        <i class="fas fa-moon"></i>
+                    </button>
+
+                    <!-- Mobile Menu Button -->
+                    <button class="md:hidden nav-text transition-colors duration-300">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section py-20 px-4 transition-colors duration-300">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+            <div>
+                <h1 class="text-5xl md:text-6xl font-bold mb-6 hero-title">
+                    Emergency Response System
+                </h1>
+                <p class="text-lg md:text-xl mb-8 section-description">
+                    Fast, reliable ambulance dispatch system for emergency medical services. Real-time tracking and seamless coordination.
+                </p>
+                <button class="cta-button px-8 py-3 rounded-lg font-semibold transition-all duration-300 hover:shadow-lg">
+                    Get Started
+                </button>
+            </div>
+            <div class="flex justify-center">
+                <div class="illustration-box w-full max-w-md h-80 rounded-2xl flex items-center justify-center">
+                    <i class="fas fa-map text-6xl opacity-30"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services-section py-20 px-4 transition-colors duration-300">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-4xl font-bold mb-4 section-title">Our Services</h2>
+            <p class="text-lg mb-12 section-description">
+                Comprehensive emergency response solutions tailored to your needs.
+            </p>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Service Card 1 -->
+                <div class="service-card p-8 rounded-xl transition-all duration-300 hover:shadow-xl hover:scale-105">
+                    <div class="icon-box mb-4">
+                        <i class="fas fa-location-dot text-3xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3 card-title">Real-Time Tracking</h3>
+                    <p class="card-description">
+                        GPS-enabled ambulance tracking for real-time location monitoring and optimal routing.
+                    </p>
+                </div>
+
+                <!-- Service Card 2 -->
+                <div class="service-card p-8 rounded-xl transition-all duration-300 hover:shadow-xl hover:scale-105">
+                    <div class="icon-box mb-4">
+                        <i class="fas fa-headset text-3xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3 card-title">24/7 Support</h3>
+                    <p class="card-description">
+                        Round-the-clock customer support and emergency response coordination for your peace of mind.
+                    </p>
+                </div>
+
+                <!-- Service Card 3 -->
+                <div class="service-card p-8 rounded-xl transition-all duration-300 hover:shadow-xl hover:scale-105">
+                    <div class="icon-box mb-4">
+                        <i class="fas fa-mobile-alt text-3xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3 card-title">Mobile App</h3>
+                    <p class="card-description">
+                        Intuitive mobile application for dispatchers and drivers to manage calls efficiently.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features-section py-20 px-4 transition-colors duration-300">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-4xl font-bold mb-4 section-title">Key Features</h2>
+            <p class="text-lg mb-12 section-description">
+                Advanced features designed for modern emergency dispatch operations.
+            </p>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Feature 1 -->
+                <div class="feature-item p-8 rounded-xl transition-colors duration-300">
+                    <div class="flex gap-4">
+                        <div class="feature-icon">
+                            <i class="fas fa-chart-line text-2xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-2 card-title">Analytics Dashboard</h3>
+                            <p class="card-description">
+                                Comprehensive analytics and reporting tools to monitor system performance and metrics.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="feature-item p-8 rounded-xl transition-colors duration-300">
+                    <div class="flex gap-4">
+                        <div class="feature-icon">
+                            <i class="fas fa-shield-alt text-2xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-2 card-title">Secure & Reliable</h3>
+                            <p class="card-description">
+                                Enterprise-grade security with end-to-end encryption for all communications.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="feature-item p-8 rounded-xl transition-colors duration-300">
+                    <div class="flex gap-4">
+                        <div class="feature-icon">
+                            <i class="fas fa-sync-alt text-2xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-2 card-title">Real-Time Sync</h3>
+                            <p class="card-description">
+                                Instant synchronization across all devices and platforms for seamless coordination.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Feature 4 -->
+                <div class="feature-item p-8 rounded-xl transition-colors duration-300">
+                    <div class="flex gap-4">
+                        <div class="feature-icon">
+                            <i class="fas fa-users text-2xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-2 card-title">Team Collaboration</h3>
+                            <p class="card-description">
+                                Built-in tools for seamless team communication and resource management.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section py-20 px-4 transition-colors duration-300">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-4 gap-8 text-center">
+                <div>
+                    <div class="text-4xl md:text-5xl font-bold stat-number mb-2">500+</div>
+                    <p class="section-description">Active Users</p>
+                </div>
+                <div>
+                    <div class="text-4xl md:text-5xl font-bold stat-number mb-2">10K+</div>
+                    <p class="section-description">Daily Dispatches</p>
+                </div>
+                <div>
+                    <div class="text-4xl md:text-5xl font-bold stat-number mb-2">99.9%</div>
+                    <p class="section-description">Uptime</p>
+                </div>
+                <div>
+                    <div class="text-4xl md:text-5xl font-bold stat-number mb-2">24/7</div>
+                    <p class="section-description">Support</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section py-20 px-4 transition-colors duration-300">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-4xl md:text-5xl font-bold mb-6 section-title">
+                Ready to Transform Your Dispatch Operations?
+            </h2>
+            <p class="text-lg md:text-xl mb-8 section-description">
+                Join hundreds of emergency services using our platform.
+            </p>
+            <button class="cta-button px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 hover:shadow-lg">
+                Start Free Trial
+            </button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer-section py-12 px-4 transition-colors duration-300 border-t border-opacity-20">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <h4 class="font-bold mb-4 footer-title">Product</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="footer-link transition-colors duration-300">Features</a></li>
+                        <li><a href="#" class="footer-link transition-colors duration-300">Pricing</a></li>
+                        <li><a href="#" class="footer-link transition-colors duration-300">Demo</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4 footer-title">Company</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="footer-link transition-colors duration-300">About</a></li>
+                        <li><a href="#" class="footer-link transition-colors duration-300">Blog</a></li>
+                        <li><a href="#" class="footer-link transition-colors duration-300">Careers</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4 footer-title">Support</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="footer-link transition-colors duration-300">Help Center</a></li>
+                        <li><a href="#" class="footer-link transition-colors duration-300">Contact</a></li>
+                        <li><a href="#" class="footer-link transition-colors duration-300">Status</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4 footer-title">Legal</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="footer-link transition-colors duration-300">Privacy</a></li>
+                        <li><a href="#" class="footer-link transition-colors duration-300">Terms</a></li>
+                        <li><a href="#" class="footer-link transition-colors duration-300">Cookies</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-opacity-20 pt-8 flex justify-between items-center">
+                <p class="footer-text">&copy; 2024 Ambulance Dispatch System. All rights reserved.</p>
+                <div class="flex gap-4">
+                    <a href="#" class="footer-link transition-colors duration-300"><i class="fab fa-facebook"></i></a>
+                    <a href="#" class="footer-link transition-colors duration-300"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="footer-link transition-colors duration-300"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="./dark-mode-script.js"></script>
+</body>
+</html>
