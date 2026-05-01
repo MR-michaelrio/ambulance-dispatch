@@ -23,12 +23,12 @@
     <!-- Group: Analytics & Map -->
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
         <!-- Ambulance Analytics -->
-        <div class="lg:col-span-1 bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
-            <div class="p-5 border-b border-gray-50 bg-gray-50/50 flex justify-between items-center">
-                <h2 class="font-bold text-gray-800 flex items-center gap-2">
+        <div class="lg:col-span-1 bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 overflow-hidden transition-colors">
+            <div class="p-5 border-b border-gray-50 dark:border-gray-700 bg-gray-50 dark:bg-gray-700 flex justify-between items-center transition-colors">
+                <h2 class="font-bold text-gray-900 dark:text-white flex items-center gap-2">
                     🚑 Analitik Per Mobil
                 </h2>
-                <span class="text-[10px] bg-gray-200 text-gray-600 px-2 py-0.5 rounded-full font-bold uppercase">Bulan Ini</span>
+                <span class="text-[10px] bg-gray-200 dark:bg-gray-600 text-gray-700 dark:text-gray-200 px-2 py-0.5 rounded-full font-bold uppercase transition-colors">Bulan Ini</span>
             </div>
             <div class="p-5 max-h-[400px] overflow-y-auto">
                 <div class="space-y-4">
@@ -54,11 +54,11 @@
         <div class="lg:col-span-2 bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden relative group">
             <div id="map" class="w-full h-[400px]"></div>
             <div class="absolute top-4 right-4 z-[1000] pointer-events-none">
-                <div class="bg-white/90 backdrop-blur-md p-3 rounded-xl shadow-lg border border-white/50">
-                    <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Status Live</p>
+                <div class="bg-white dark:bg-slate-900 backdrop-blur-md p-3 rounded-xl shadow-lg border border-gray-200 dark:border-slate-700">
+                    <p class="text-[10px] font-bold text-gray-600 dark:text-gray-300 uppercase tracking-widest mb-1">Status Live</p>
                     <div class="flex items-center gap-2">
                         <div class="w-2 h-2 bg-green-500 rounded-full animate-pulse shadow-[0_0_8px_rgba(34,197,94,0.6)]"></div>
-                        <span class="text-xs font-black text-gray-700 tracking-tighter uppercase">Tracking Active</span>
+                        <span class="text-xs font-black text-gray-900 dark:text-white tracking-tighter uppercase">Tracking Active</span>
                     </div>
                 </div>
             </div>
@@ -118,9 +118,39 @@
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
 <script>
-    // Map remains the same, just smaller in context
     const map = L.map('map').setView([-6.2, 106.8], 11);
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+    const thunderforestKey = '<?php echo e(env('THUNDERFOREST_API_KEY', '')); ?>'.trim();
+
+    const tileUrls = {
+        dark: thunderforestKey
+            ? `https://{s}.tile.thunderforest.com/transport-dark/{z}/{x}/{y}.png?apikey=${thunderforestKey}`
+            : 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',
+        light: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+    };
+
+    const attributions = {
+        dark: thunderforestKey ? '© Thunderforest, © OpenStreetMap' : '© CartoDB, © OpenStreetMap',
+        light: '© OpenStreetMap contributors'
+    };
+
+    const isDarkMode = () => document.documentElement.classList.contains('dark');
+
+    let tileLayer = L.tileLayer(isDarkMode() ? tileUrls.dark : tileUrls.light, {
+        attribution: isDarkMode() ? attributions.dark : attributions.light,
+        maxZoom: 19
+    }).addTo(map);
+
+    new MutationObserver(() => {
+        const dark = isDarkMode();
+        const nextUrl = dark ? tileUrls.dark : tileUrls.light;
+        if (tileLayer._url !== nextUrl) {
+            map.removeLayer(tileLayer);
+            tileLayer = L.tileLayer(nextUrl, {
+                attribution: dark ? attributions.dark : attributions.light,
+                maxZoom: 19
+            }).addTo(map);
+        }
+    }).observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
 
     const markers = {};
 

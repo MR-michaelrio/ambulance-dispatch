@@ -11,15 +11,15 @@
                 <!-- Desktop Links -->
                 <div class="hidden space-x-8 lg:-my-px lg:ml-10 lg:flex items-center">
                     @if(auth()->user()->role === 'admin')
-                        <a href="{{ route('admin.ambulances.index') }}" class="text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Ambulance</a>
-                        <a href="{{ route('admin.ambulance-types.index') }}" class="text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Tipe Armada</a>
-                        <a href="{{ route('admin.drivers.index') }}" class="text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Driver</a>
-                        <a href="{{ route('admin.dispatches.index') }}" class="text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Dispatch</a>
-                        <a href="{{ route('admin.schedules.index') }}" class="text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">📅 Jadwal</a>
-                        <a href="{{ route('admin.event-requests.index') }}" class="text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">🎪 Event</a>
-                        <a href="{{ route('admin.patient-requests.index') }}" class="text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">📋 Permintaan</a>
-                        <a href="{{ route('admin.users.index') }}" class="text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">👥 User</a>
-                        <a href="{{ route('admin.maps') }}" class="text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">🗺️ Maps</a>
+                        <a href="{{ route('admin.ambulances.index') }}" class="text-sm font-medium text-gray-700 dark:text-gray-200 hover:text-indigo-600 dark:hover:text-indigo-300 transition-colors">Ambulance</a>
+                        <a href="{{ route('admin.ambulance-types.index') }}" class="text-sm font-medium text-gray-700 dark:text-gray-200 hover:text-indigo-600 dark:hover:text-indigo-300 transition-colors">Tipe Armada</a>
+                        <a href="{{ route('admin.drivers.index') }}" class="text-sm font-medium text-gray-700 dark:text-gray-200 hover:text-indigo-600 dark:hover:text-indigo-300 transition-colors">Driver</a>
+                        <a href="{{ route('admin.dispatches.index') }}" class="text-sm font-medium text-gray-700 dark:text-gray-200 hover:text-indigo-600 dark:hover:text-indigo-300 transition-colors">Dispatch</a>
+                        <a href="{{ route('admin.schedules.index') }}" class="text-sm font-medium text-gray-700 dark:text-gray-200 hover:text-indigo-600 dark:hover:text-indigo-300 transition-colors">📅 Jadwal</a>
+                        <a href="{{ route('admin.event-requests.index') }}" class="text-sm font-medium text-gray-700 dark:text-gray-200 hover:text-indigo-600 dark:hover:text-indigo-300 transition-colors">🎪 Event</a>
+                        <a href="{{ route('admin.patient-requests.index') }}" class="text-sm font-medium text-gray-700 dark:text-gray-200 hover:text-indigo-600 dark:hover:text-indigo-300 transition-colors">📋 Permintaan</a>
+                        <a href="{{ route('admin.users.index') }}" class="text-sm font-medium text-gray-700 dark:text-gray-200 hover:text-indigo-600 dark:hover:text-indigo-300 transition-colors">👥 User</a>
+                        <a href="{{ route('admin.maps') }}" class="text-sm font-medium text-gray-700 dark:text-gray-200 hover:text-indigo-600 dark:hover:text-indigo-300 transition-colors">🗺️ Maps</a>
                     @endif
                 </div>
             </div>
@@ -28,11 +28,11 @@
             <div class="flex items-center space-x-4">
                 <!-- Dark Mode Toggle Button -->
                 <button 
-                    @click="toggleDarkMode()" 
+                    id="dark-mode-toggle"
                     class="p-2 rounded-lg bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100 transition-all duration-300 transform hover:scale-110"
                     title="Toggle Dark Mode">
-                    <span x-show="!isDark" class="block text-xl">🌙</span>
-                    <span x-show="isDark" class="block text-xl">☀️</span>
+                    <span id="dark-mode-icon" class="block text-xl">🌙</span>
+                    <span id="light-mode-icon" class="hidden text-xl">☀️</span>
                 </button>
 
                 <div class="hidden lg:block">
@@ -59,15 +59,15 @@
     <div :class="{'block': open, 'hidden': ! open}" class="hidden lg:hidden border-t border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 transition-colors">
         <div class="pt-2 pb-3 space-y-1">
             @if(auth()->user()->role === 'admin')
-                <a href="{{ route('admin.ambulances.index') }}" class="block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 hover:border-gray-300 dark:hover:border-gray-500 transition-colors">Ambulance</a>
-                <a href="{{ route('admin.ambulance-types.index') }}" class="block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 hover:border-gray-300 dark:hover:border-gray-500 transition-colors">Tipe Armada</a>
-                <a href="{{ route('admin.drivers.index') }}" class="block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 hover:border-gray-300 dark:hover:border-gray-500 transition-colors">Driver</a>
-                <a href="{{ route('admin.dispatches.index') }}" class="block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 hover:border-gray-300 dark:hover:border-gray-500 transition-colors">Dispatch</a>
-                <a href="{{ route('admin.schedules.index') }}" class="block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 hover:border-gray-300 dark:hover:border-gray-500 transition-colors">📅 Jadwal</a>
-                <a href="{{ route('admin.event-requests.index') }}" class="block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 hover:border-gray-300 dark:hover:border-gray-500 transition-colors">🎪 Event</a>
-                <a href="{{ route('admin.patient-requests.index') }}" class="block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 hover:border-gray-300 dark:hover:border-gray-500 transition-colors">📋 Permintaan</a>
-                <a href="{{ route('admin.users.index') }}" class="block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 hover:border-gray-300 dark:hover:border-gray-500 transition-colors">👥 User</a>
-                <a href="{{ route('admin.maps') }}" class="block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 hover:border-gray-300 dark:hover:border-gray-500 transition-colors">🗺️ Maps</a>
+                <a href="{{ route('admin.ambulances.index') }}" class="block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-gray-600 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 hover:border-gray-300 dark:hover:border-gray-500 transition-colors">Ambulance</a>
+                <a href="{{ route('admin.ambulance-types.index') }}" class="block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-gray-600 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 hover:border-gray-300 dark:hover:border-gray-500 transition-colors">Tipe Armada</a>
+                <a href="{{ route('admin.drivers.index') }}" class="block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-gray-600 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 hover:border-gray-300 dark:hover:border-gray-500 transition-colors">Driver</a>
+                <a href="{{ route('admin.dispatches.index') }}" class="block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-gray-600 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 hover:border-gray-300 dark:hover:border-gray-500 transition-colors">Dispatch</a>
+                <a href="{{ route('admin.schedules.index') }}" class="block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-gray-600 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 hover:border-gray-300 dark:hover:border-gray-500 transition-colors">📅 Jadwal</a>
+                <a href="{{ route('admin.event-requests.index') }}" class="block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-gray-600 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 hover:border-gray-300 dark:hover:border-gray-500 transition-colors">🎪 Event</a>
+                <a href="{{ route('admin.patient-requests.index') }}" class="block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-gray-600 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 hover:border-gray-300 dark:hover:border-gray-500 transition-colors">📋 Permintaan</a>
+                <a href="{{ route('admin.users.index') }}" class="block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-gray-600 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 hover:border-gray-300 dark:hover:border-gray-500 transition-colors">👥 User</a>
+                <a href="{{ route('admin.maps') }}" class="block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-gray-600 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 hover:border-gray-300 dark:hover:border-gray-500 transition-colors">🗺️ Maps</a>
             @endif
             
             <form method="POST" action="{{ route('logout') }}" class="pt-2 border-t border-gray-200 dark:border-gray-700">

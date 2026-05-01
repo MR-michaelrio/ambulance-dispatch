@@ -28,7 +28,7 @@ foreach ($attributes->all() as $__key => $__value) {
 
 unset($__defined_vars, $__key, $__value); ?>
 
-<label <?php echo e($attributes->merge(['class' => 'block font-medium text-sm text-gray-700'])); ?>>
+<label <?php echo e($attributes->merge(['class' => 'block font-medium text-sm text-gray-800 dark:text-gray-100 transition-colors'])); ?>>
     <?php echo e($value ?? $slot); ?>
 
 </label>

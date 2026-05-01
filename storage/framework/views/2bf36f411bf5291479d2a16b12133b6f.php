@@ -124,6 +124,7 @@
                 }
                 if (permStatus.receive === 'granted') {
                     PushNotifications.addListener('registration', (token) => {
+                        // 1. Send to Local GMCI Server
                         fetch('/public-fcm-token', {
                             method: 'POST',
                             headers: {
@@ -131,8 +132,38 @@
                                 'X-CSRF-TOKEN': '<?php echo e(csrf_token()); ?>',
                                 'Accept': 'application/json'
                             },
-                            body: JSON.stringify({ token: token.value })
-                        }).catch(err => console.error(err));
+                            body: JSON.stringify({ 
+                                token: token.value,
+                                project: 'gmci'
+                            })
+                        }).catch(err => console.error('Local register error:', err));
+
+                        // 2. Send to Central Damkar Server
+                        const damkarHeaders = new Headers();
+                        damkarHeaders.append("Content-Type", "application/json");
+
+                        const damkarRaw = JSON.stringify({
+                            "token": token.value,
+                            "project": "gmci"
+                        });
+
+                        const damkarRequestOptions = {
+                            method: "POST",
+                            headers: damkarHeaders,
+                            body: damkarRaw,
+                            redirect: "follow"
+                        };
+
+                        fetch("https://damkarkabbekasi.my.id/public-fcm-token", damkarRequestOptions)
+                            .then((response) => response.json())
+                            .then((result) => {
+                                console.log('Damkar register success:', result);
+                                alert('Berhasil mendaftarkan Token ke Damkar');
+                            })
+                            .catch((error) => {
+                                console.error('Damkar register error:', error);
+                                alert('Gagal mendaftarkan Token ke Damkar: ' + error.message);
+                            });
                     });
 
                     PushNotifications.addListener('pushNotificationReceived', (notification) => {

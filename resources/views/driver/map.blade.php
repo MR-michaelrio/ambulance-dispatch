@@ -32,10 +32,38 @@
     // Default map (Jakarta sebagai fallback)
     const map = L.map('map').setView([-6.200000, 106.816666], 13);
 
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    const thunderforestKey = '{{ env('THUNDERFOREST_API_KEY', '') }}'.trim();
+
+    const tileUrls = {
+        dark: thunderforestKey
+            ? `https://{s}.tile.thunderforest.com/transport-dark/{z}/{x}/{y}.png?apikey=${thunderforestKey}`
+            : 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',
+        light: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+    };
+
+    const attributions = {
+        dark: thunderforestKey ? '© Thunderforest, © OpenStreetMap' : '© CartoDB, © OpenStreetMap',
+        light: '© OpenStreetMap contributors'
+    };
+
+    const isDarkMode = () => document.documentElement.classList.contains('dark');
+
+    let tileLayer = L.tileLayer(isDarkMode() ? tileUrls.dark : tileUrls.light, {
         maxZoom: 19,
-        attribution: '© OpenStreetMap'
+        attribution: isDarkMode() ? attributions.dark : attributions.light
     }).addTo(map);
+
+    new MutationObserver(() => {
+        const dark = isDarkMode();
+        const nextUrl = dark ? tileUrls.dark : tileUrls.light;
+        if (tileLayer._url !== nextUrl) {
+            map.removeLayer(tileLayer);
+            tileLayer = L.tileLayer(nextUrl, {
+                maxZoom: 19,
+                attribution: dark ? attributions.dark : attributions.light
+            }).addTo(map);
+        }
+    }).observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
 
     // Marker ambulance
     let ambulanceMarker = null;

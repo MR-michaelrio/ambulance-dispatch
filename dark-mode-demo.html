@@ -21,8 +21,8 @@
                     if (stored !== null) {
                         this.isDark = stored === 'true';
                     } else {
-                        // Check system preference
-                        this.isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                        // DEFAULT: Light mode (tidak mengikuti system preference)
+                        this.isDark = false;
                     }
                     this.applyDarkMode();
                 },
@@ -125,7 +125,7 @@
             <p class="text-gray-700 dark:text-gray-300 mb-4">
                 Click the moon (🌙) or sun (☀️) icon in the top-right corner of the navbar to toggle between Light and Dark modes.
             </p>
-            <div class="text-sm text-gray-600 dark:text-gray-400">
+            <div class=\"text-sm text-gray-700 dark:text-gray-300\">
                 <ul class="list-disc list-inside space-y-2">
                     <li><strong>Instant Toggle:</strong> Switch between modes with a smooth transition</li>
                     <li><strong>Persistent Storage:</strong> Your preference is saved in localStorage</li>
