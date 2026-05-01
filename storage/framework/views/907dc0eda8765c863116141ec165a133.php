@@ -13,6 +13,13 @@
 
     <!-- Tailwind CDN (NO VITE) -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        // Force light mode on guest pages: opt into class strategy and never add the class.
+        tailwind.config = { darkMode: 'class' };
+    </script>
+    <style>
+        html { color-scheme: light !important; }
+    </style>
 </head>
 
 <body class="font-sans text-gray-900 antialiased bg-gray-100">
